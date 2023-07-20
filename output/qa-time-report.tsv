@@ -1,0 +1,7 @@
+Source File	Size	loadResources	load-configure	scan	loadDepInfo	loadInfo	load	generateSnapshots	checkR4R4B	generateNarratives	validate	loadLists	checkConformanceResources	checkConformanceResources2	checkConformanceResources3	generateLogicalMaps	validateExpressions	scanForUsageStats	checkURLsUnique	processProvenanceDetails	generate1	generate2	generateLogicals	makeDependencies
+/input/cqf-ccc.xml	5325	-	0	0	0	0	0	0	3	102	0	0	0	0	0	0	0	0	0	0	104	73	0	0
+input/resources/library/THSAMeasure.json	564657	84	0	0	0	1	0	0	2	112	0	0	0	0	0	0	0	1	0	0	1816	86	0	0
+input/resources/library/SupplementalDataElementsFHIR4.json	121052	20	0	0	0	0	0	0	0	25	0	0	0	0	0	0	0	0	0	0	399	23	0	0
+input/resources/library/MATGlobalCommonFunctionsFHIR4.json	1223216	71	0	0	0	0	0	0	1	155	0	0	0	0	0	0	0	0	0	0	3730	112	0	0
+input/resources/library/FHIRHelpers.json	1653046	85	1	0	0	0	0	0	0	115	0	0	0	0	0	0	0	0	0	0	5069	146	0	0
+input/resources/measure/THSAMeasure.json	40189	106	0	0	0	0	0	0	4	91	0	0	0	0	0	0	0	0	0	0	203	57	0	0

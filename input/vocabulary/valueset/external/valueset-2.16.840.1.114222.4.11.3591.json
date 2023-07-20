@@ -1,0 +1,48 @@
+{
+    "resourceType": "ValueSet",
+    "id": "2.16.840.1.114222.4.11.3591",
+    "meta": {
+      "versionId": "18",
+      "lastUpdated": "2023-06-02T13:02:29.000-04:00",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+    },
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-author",
+      "valueString": "HL7 Structured Documents WG"
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-keyWord",
+      "valueString": "CCDAr21"
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/resource-lastReviewDate",
+      "valueDate": "2022-12-15"
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+      "valueDate": "2022-11-18"
+    } ],
+    "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591",
+    "identifier": [ {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.114222.4.11.3591"
+    } ],
+    "version": "20221118",
+    "name": "Payer Type",
+    "title": "Name changed on 2023-06-02 per JIRA https://jira.hl7.org/browse/FHIR-39982",
+    "status": "active",
+    "experimental": false,
+    "date": "2022-11-18T01:02:49-05:00",
+    "publisher": "HL7 Terminology",
+    "description": "Name changed on 2023-06-02 per JIRA https://jira.hl7.org/browse/FHIR-39982",
+    "jurisdiction": [ {
+      "extension": [ {
+        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+        "valueString": "UNKNOWN"
+      } ]
+    } ],
+    "purpose": "(Clinical Focus: Categories of types of health care payer entities as defined by the US Public Health Data Consortium SOP code system),(Data Element Scope: @code in CCDA r2.1 template Planned Coverage [act: identifier urn:oid:2.16.840.1.113883.10.20.22.4.129 (open)] DYNAMIC),(Inclusion Criteria: All codes in the code system),(Exclusion Criteria: none)",
+    "compose": {
+      "include": [ {
+        "system": "https://nahdo.org/sopt",
+        "version": "9.2"
+      } ]
+    }
+  }

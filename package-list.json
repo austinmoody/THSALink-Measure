@@ -1,0 +1,13 @@
+{
+ "package-id" : "thsameasure",
+ "title" : "THSALink Measure",
+ "canonical" : "https://github.com/AudaciousInquiry/THSAlink",
+ "introduction" : "Measure for THSALink project.",
+ "list" : [{
+  "version" : "current",
+  "desc" : "Continuous Integration Build (latest in version control)",
+  "path" : "https://github.com/AudaciousInquiry/THSAlink",
+  "status" : "ci-build",
+  "current" : true
+ }]
+}

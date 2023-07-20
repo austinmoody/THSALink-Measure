@@ -1,0 +1,73 @@
+{
+    "resourceType": "ValueSet",
+    "id": "2.16.840.1.113883.1.11.20275",
+    "meta": {
+      "versionId": "24",
+      "lastUpdated": "2020-06-04T01:00:22.000-04:00",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+    },
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-author",
+      "valueString": "HL7 Structured Documents WG"
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-keyWord",
+      "valueString": "CCDAr21"
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/resource-lastReviewDate",
+      "valueDate": "2022-12-15"
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+      "valueDate": "2020-06-04"
+    } ],
+    "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.1.11.20275",
+    "identifier": [ {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113883.1.11.20275"
+    } ],
+    "version": "20200604",
+    "name": "HealthcareServiceLocation",
+    "title": "A comprehensive classification of locations and settings where healthcare services are provided. This value set is based on the National Healthcare Safety Network (NHSN) location code system that has been developed over a number of years through CDC's interaction with a variety of healthcare facilities and is intended to serve a variety of reporting needs where coding of healthcare service locations is required.\nValue Set: HealthcareServiceLocation 2.16.840.1.113883.1.11.20275 DYNAMIC\nCode System(s):\tHealthcareServiceLocation 2.16.840.1.113883.6.259\n\nCode\tCode System\tPrint Name\n1024-9\tHealthcareServiceLocation\tCritical Care Unit\n1117-1\tHealthcareServiceLocation\tFamily Medicine Clinic\n1128-8\tHealthcareServiceLocation\tPediatric Clinic\n1160-1\tHealthcareServiceLocation\tUrgent Care Center",
+    "status": "active",
+    "experimental": false,
+    "date": "2020-06-04T01:00:22-04:00",
+    "publisher": "HL7 Terminology",
+    "description": "A comprehensive classification of locations and settings where healthcare services are provided. This value set is based on the National Healthcare Safety Network (NHSN) location code system that has been developed over a number of years through CDC's interaction with a variety of healthcare facilities and is intended to serve a variety of reporting needs where coding of healthcare service locations is required.\nValue Set: HealthcareServiceLocation 2.16.840.1.113883.1.11.20275 DYNAMIC\nCode System(s):\tHealthcareServiceLocation 2.16.840.1.113883.6.259\n\nCode\tCode System\tPrint Name\n1024-9\tHealthcareServiceLocation\tCritical Care Unit\n1117-1\tHealthcareServiceLocation\tFamily Medicine Clinic\n1128-8\tHealthcareServiceLocation\tPediatric Clinic\n1160-1\tHealthcareServiceLocation\tUrgent Care Center",
+    "jurisdiction": [ {
+      "extension": [ {
+        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+        "valueString": "UNKNOWN"
+      } ]
+    } ],
+    "purpose": "(Clinical Focus: Concepts representing locations and settings where healthcare services are provided. This includes non- (or atypical) patient care locations where emergency services may be provided.\nThe values are derived from the NHSN Healthcare Facility Patient Care Location code system.),(Data Element Scope: Location),(Inclusion Criteria: All codes in code system),(Exclusion Criteria: Codes that do not represent an actual location where health care services can be delivered, IE: Float, or a location aggregation.)",
+    "compose": {
+      "include": [ {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022"
+      } ],
+      "exclude": [ {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "filter": [ {
+          "property": "concept",
+          "op": "=",
+          "value": "1206-2"
+        } ]
+      }, {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "filter": [ {
+          "property": "concept",
+          "op": "=",
+          "value": "1250-0"
+        } ]
+      }, {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "filter": [ {
+          "property": "concept",
+          "op": "=",
+          "value": "1251-8"
+        } ]
+      } ]
+    }
+  }

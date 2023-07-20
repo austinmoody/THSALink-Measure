@@ -1,0 +1,17 @@
+{"resourceType":"OperationOutcome","issue":[
+      
+{"severity":"error","code":"required","details":{"text":"Unable to find ImplementationGuide.definition.resource.name for the resource Library/THSAMeasure.  Name is mandatory if it cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[0]"]}
+,
+{"severity":"warning","code":"invariant","details":{"text":"Unable to find ImplementationGuide.definition.resource.description for the resource Library/THSAMeasure.  Descriptions are strongly encouraged if they cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[0]"]}
+,
+{"severity":"error","code":"required","details":{"text":"Unable to find ImplementationGuide.definition.resource.name for the resource Library/SupplementalDataElementsFHIR4.  Name is mandatory if it cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[1]"]}
+,
+{"severity":"warning","code":"invariant","details":{"text":"Unable to find ImplementationGuide.definition.resource.description for the resource Library/SupplementalDataElementsFHIR4.  Descriptions are strongly encouraged if they cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[1]"]}
+,
+{"severity":"error","code":"required","details":{"text":"Unable to find ImplementationGuide.definition.resource.name for the resource Library/MATGlobalCommonFunctionsFHIR4.  Name is mandatory if it cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[2]"]}
+,
+{"severity":"warning","code":"invariant","details":{"text":"Unable to find ImplementationGuide.definition.resource.description for the resource Library/MATGlobalCommonFunctionsFHIR4.  Descriptions are strongly encouraged if they cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[2]"]}
+,
+{"severity":"warning","code":"invariant","details":{"text":"Unable to find ImplementationGuide.definition.resource.description for the resource Measure/THSAMeasure.  Descriptions are strongly encouraged if they cannot be inferred from the resource to allow proper population of the artifact list."},"location":["ImplementationGuide.definition.resource[4]"]}
+]}
+      

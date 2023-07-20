@@ -1,0 +1,1182 @@
+{
+  "resourceType": "Measure",
+  "id": "THSAMeasure",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2023-02-03T12:47:52.144-05:00",
+    "source": "#s8FnlXzPs86bPZVj",
+    "profile": [ "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-measure-cqfm" ]
+  },
+  "contained": [ {
+    "resourceType": "Library",
+    "id": "effective-data-requirements",
+    "extension": [ {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-directReferenceCode",
+      "valueCoding": {
+        "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+        "code": "3",
+        "display": "admission class"
+      }
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-directReferenceCode",
+      "valueCoding": {
+        "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+        "code": "6",
+        "display": "discharge class"
+      }
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-directReferenceCode",
+      "valueCoding": {
+        "system": "urn:oid:1.2.840.114350.1.13.68.2.7.10.698084.10110",
+        "code": "1",
+        "display": "inpatient type"
+      }
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-directReferenceCode",
+      "valueCoding": {
+        "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+        "code": "bd",
+        "display": "Bed"
+      }
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "In Progress or Completed Inpatient Encounters"
+      }, {
+        "url": "statement",
+        "valueString": "define \"In Progress or Completed Inpatient Encounters\":\n    [Encounter: class in {\"admission class\",\"discharge class\"}] Encounters\n        where Encounters.status in { 'finished', 'in-progress' }\n        and true in \"Check For Inpatient Encounter Type\"(Encounters)\n        and Encounters.period ends during \"Measurement Period\""
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 0
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Initial Population"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Initial Population\":\n    \"In Progress or Completed Inpatient Encounters\""
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 1
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "PatientAge"
+      }, {
+        "url": "statement",
+        "valueString": "define \"PatientAge\":\n    AgeInYearsAt(start of \"Measurement Period\")"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 2
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 30-39"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 30-39\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 30 and PatientAge < 40"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 3
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "SupplementalDataElementsFHIR4"
+      }, {
+        "url": "name",
+        "valueString": "SDE Race"
+      }, {
+        "url": "statement",
+        "valueString": "define \"SDE Race\":\n  (flatten (\n      Patient.extension Extension\n        where Extension.url = 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-race'\n          return Extension.extension\n    )) E\n      where E.url = 'ombCategory'\n        or E.url = 'detailed'\n      return E.value as Coding"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 4
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Race Stratifier"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Race Stratifier\": \n    SDE.\"SDE Race\""
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 5
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 50-59"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 50-59\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 50 and PatientAge < 60"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 6
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Numerator 1"
+      }, {
+        "url": "statement",
+        "valueString": "/*\ndefine function \"Check for Inpatient Hospital Location\"(location Location):\n    location.type types\n    return (\n        types ~ \"Inpatient Location\" \n        or types ~ \"ICU Location\"\n    )\n\ndefine function \"Check for ICU Hospital Location\"(location Location):\n    location.type types\n    return types ~ \"ICU Location\"\n*/\ndefine \"Numerator 1\": \n    \"Initial Population\" IP\n\n    where exists(\n        IP.location IPLocation\n        where IPLocation.physicalType ~ \"Bed\"\n    )"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 7
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Numerator 2"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Numerator 2\": \n    \"Initial Population\" InitialPopulation\n\n    where exists(\n        InitialPopulation.location loc\n        where loc.location.reference ~ 'Location/eVMRCa.HAjzG-vMGRSJMFKQ3'\n        or loc.location.reference ~ 'Location/e1f.FE8SwfX-QWcLcMxn-fQ3'\n        or loc.location.reference ~ 'Location/e5UV0fFVck9t2AoKZTbRPSQ3'\n        or loc.location.reference ~ 'Location/erYSPKXOCD3.OojjrJOgkgQ3'\n        or loc.location.reference ~ 'Location/emDWszriZvC5TuMi4l8fWhA3'\n        or loc.location.reference ~ 'Location/e2174iRNqlYR4CWT-agCAVw3'\n        or loc.location.reference ~ 'Location/eK3oL9aTOs757RL166OF6mQ3'\n        or loc.location.reference ~ 'Location/e39Y-sPslAZgn1zs68fNMtQ3'\n        or loc.location.reference ~ 'Location/eT2iWRXYGSazBxtDnrcLlZA3'\n        or loc.location.reference ~ 'Location/eXjJpL6A95mvWrHsNJztmHg3'\n        or loc.location.reference ~ 'Location/eqSRRsUgo4Lm5AVbeUlXOfw3'\n        or loc.location.reference ~ 'Location/elaCb5W0tc17nqQi4nWWaQw3'\n        or loc.location.reference ~ 'Location/e4Ari1l1Wl87h5gF88VaxiQ3'\n        or loc.location.reference ~ 'Location/eChXXcCOucRaM3eLsSQp2kw3'\n        or loc.location.reference ~ 'Location/eeA.2iioiQ.bkkfbMapxn6g3'\n        /*\n        where loc.location.display ~ 'FIFTEEN NS ICU'\n        or loc.location.display ~ 'FIVE SURG ICU'\n        or loc.location.display ~ 'FIFTEEN SURG ICU'\n        or loc.location.display ~ 'SIX BURN ICU'\n        or loc.location.display ~ 'Fifteen CV ICU'\n        or loc.location.display ~ 'FOUR NICU'\n        or loc.location.display ~ 'TEN SOUTH CARDIO PULM ICU'\n        or loc.location.display ~ 'NINE NORTH MEDICAL ICU'\n        or loc.location.display ~ 'SIXTEEN NS ICU/PCU'\n        or loc.location.display ~ 'Two N Trauma Surg ICU D'\n        or loc.location.display ~ 'Two N Trauma Surg ICU C'\n        or loc.location.display ~ 'Two N Surg ICU A'\n        or loc.location.display ~ 'Sixteen TCU ICU'\n        or loc.location.display ~ 'Two N Neuro Surg ICU B'\n        */\n    )\n    and exists(\n        InitialPopulation.location IPLocations\n        where IPLocations.physicalType ~ \"Bed\"\n    )"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 8
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 70-79"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 70-79\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 70 and PatientAge < 80"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 9
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 90-99"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 90-99\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 90 and PatientAge < 100"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 10
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "SupplementalDataElementsFHIR4"
+      }, {
+        "url": "name",
+        "valueString": "SDE Ethnicity"
+      }, {
+        "url": "statement",
+        "valueString": "define \"SDE Ethnicity\":\n  (flatten (\n      Patient.extension Extension\n        where Extension.url = 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity'\n          return Extension.extension\n    )) E\n      where E.url = 'ombCategory'\n        or E.url = 'detailed'\n      return E.value as Coding"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 11
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Ethnicity Stratifier"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Ethnicity Stratifier\": \n    SDE.\"SDE Ethnicity\""
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 12
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 20-29"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 20-29\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 20 and PatientAge < 30"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 13
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Denominator"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Denominator\": \n    \"Initial Population\""
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 14
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 40-49"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 40-49\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 40 and PatientAge < 50"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 15
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 60-69"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 60-69\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 60 and PatientAge < 70"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 16
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "SupplementalDataElementsFHIR4"
+      }, {
+        "url": "name",
+        "valueString": "SDE Sex"
+      }, {
+        "url": "statement",
+        "valueString": "define \"SDE Sex\":\n  case\n      when Patient.gender = 'male' then Code { code: 'M', system: 'http://hl7.org/fhir/v3/AdministrativeGender', display: 'Male' }\n      when Patient.gender = 'female' then Code { code: 'F', system: 'http://hl7.org/fhir/v3/AdministrativeGender', display: 'Female' }\n      else null\n    end"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 17
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Sex Stratifier"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Sex Stratifier\": \n    SDE.\"SDE Sex\""
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 18
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 10-19"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 10-19\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 10 and PatientAge < 20"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 19
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Age Stratifier 80-89"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Age Stratifier 80-89\": \n    \"Initial Population\" InitialPopulation\n    where PatientAge >= 80 and PatientAge < 90"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 20
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "COVID19 Diagnoses"
+      }, {
+        "url": "statement",
+        "valueString": "define \"COVID19 Diagnoses\": \n    [Condition: \"COVID_19 (Disorders) (SNOMED)\"]\n    union [Condition: \"COVID_19 (Disorders) (ICD10CM)\"]\n    union [Condition: \"COVID_19 (COVID_19 Exposure) (SNOMED)\"]"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 21
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "COVID19 Flags"
+      }, {
+        "url": "statement",
+        "valueString": "define \"COVID19 Flags\": \n    [Flag: \"COVID_19 (Disorders) (SNOMED)\"]\n    union [Flag: \"COVID_19 (Disorders) (ICD10CM)\"]\n    union [Flag: \"COVID_19 (COVID_19 Exposure) (SNOMED)\"]"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 22
+      } ]
+    }, {
+      "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-logicDefinition",
+      "extension": [ {
+        "url": "libraryName",
+        "valueString": "THSAMeasure"
+      }, {
+        "url": "name",
+        "valueString": "Stratifier 2"
+      }, {
+        "url": "statement",
+        "valueString": "define \"Stratifier 2\": \n    \"Initial Population\" InitialPopulation\n    where exists(\n            \"COVID19 Diagnoses\" COVID19Dx\n            where Global.\"Normalize Interval\"(COVID19Dx.onset) starts 14 days or more after start of InitialPopulation.period\n            or Global.\"Normalize Interval\"(COVID19Dx.onset) starts before end of InitialPopulation.period)\n        or exists(\n            \"COVID19 Flags\" COVID19Flags\n            where COVID19Flags.period starts 14 days or more after start of InitialPopulation.period\n            or COVID19Flags.period starts before end of InitialPopulation.period\n        )"
+      }, {
+        "url": "displaySequence",
+        "valueInteger": 23
+      } ]
+    } ],
+    "status": "active",
+    "type": {
+      "coding": [ {
+        "system": "http://terminology.hl7.org/CodeSystem/library-type",
+        "code": "module-definition"
+      } ]
+    },
+    "relatedArtifact": [ {
+      "type": "depends-on",
+      "display": "Library FHIRHelpers",
+      "resource": "http://fhir.org/guides/cqf/common/Library/FHIRHelpers|4.0.1"
+    }, {
+      "type": "depends-on",
+      "display": "Library SDE",
+      "resource": "Library/SupplementalDataElementsFHIR4|2.0.000"
+    }, {
+      "type": "depends-on",
+      "display": "Library Global",
+      "resource": "Library/MATGlobalCommonFunctionsFHIR4|6.1.000"
+    }, {
+      "type": "depends-on",
+      "display": "Code system EpicEncounterClasses",
+      "resource": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260"
+    }, {
+      "type": "depends-on",
+      "display": "Code system EpicEncounterTypes",
+      "resource": "urn:oid:1.2.840.114350.1.13.68.2.7.10.698084.10110"
+    }, {
+      "type": "depends-on",
+      "display": "Code system LocationPhysicalType",
+      "resource": "http://terminology.hl7.org/CodeSystem/location-physical-type"
+    }, {
+      "type": "depends-on",
+      "display": "Value set COVID_19 (Disorders) (SNOMED)",
+      "resource": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1124"
+    }, {
+      "type": "depends-on",
+      "display": "Value set COVID_19 (Disorders) (ICD10CM)",
+      "resource": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1123"
+    }, {
+      "type": "depends-on",
+      "display": "Value set COVID_19 (COVID_19 Exposure) (SNOMED)",
+      "resource": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1203"
+    } ],
+    "parameter": [ {
+      "name": "Measurement Period",
+      "use": "in",
+      "min": 0,
+      "max": "1",
+      "type": "Period"
+    }, {
+      "name": "Age Stratifier 30-39",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Race Stratifier",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Coding"
+    }, {
+      "name": "Age Stratifier 50-59",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Numerator 1",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Numerator 2",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Age Stratifier 70-79",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Age Stratifier 90-99",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "PatientAge",
+      "use": "out",
+      "min": 0,
+      "max": "1",
+      "type": "integer"
+    }, {
+      "name": "Ethnicity Stratifier",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Coding"
+    }, {
+      "name": "Age Stratifier 20-29",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Denominator",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Age Stratifier 40-49",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Initial Population",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Age Stratifier 60-69",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Sex Stratifier",
+      "use": "out",
+      "min": 0,
+      "max": "1",
+      "type": "Coding"
+    }, {
+      "name": "Age Stratifier 10-19",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Age Stratifier 80-89",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    }, {
+      "name": "Stratifier 2",
+      "use": "out",
+      "min": 0,
+      "max": "*",
+      "type": "Encounter"
+    } ],
+    "dataRequirement": [ {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Encounter",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Encounter" ],
+      "mustSupport": [ "class", "status", "period", "location" ],
+      "codeFilter": [ {
+        "path": "class",
+        "code": [ {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "3",
+          "display": "admission class"
+        }, {
+          "system": "urn:oid:1.2.840.114350.1.72.1.7.7.10.696784.13260",
+          "code": "6",
+          "display": "discharge class"
+        } ]
+      } ]
+    }, {
+      "type": "Patient",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Patient" ],
+      "mustSupport": [ "url", "extension", "value" ]
+    }, {
+      "type": "Condition",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Condition" ],
+      "mustSupport": [ "code" ],
+      "codeFilter": [ {
+        "path": "code",
+        "valueSet": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1124"
+      } ]
+    }, {
+      "type": "Condition",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Condition" ],
+      "mustSupport": [ "code" ],
+      "codeFilter": [ {
+        "path": "code",
+        "valueSet": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1123"
+      } ]
+    }, {
+      "type": "Condition",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Condition" ],
+      "mustSupport": [ "code" ],
+      "codeFilter": [ {
+        "path": "code",
+        "valueSet": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1203"
+      } ]
+    }, {
+      "type": "Flag",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Flag" ],
+      "mustSupport": [ "code" ],
+      "codeFilter": [ {
+        "path": "code",
+        "valueSet": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1124"
+      } ]
+    }, {
+      "type": "Flag",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Flag" ],
+      "mustSupport": [ "code" ],
+      "codeFilter": [ {
+        "path": "code",
+        "valueSet": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1123"
+      } ]
+    }, {
+      "type": "Flag",
+      "profile": [ "http://hl7.org/fhir/StructureDefinition/Flag" ],
+      "mustSupport": [ "code" ],
+      "codeFilter": [ {
+        "path": "code",
+        "valueSet": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1146.1203"
+      } ]
+    } ]
+  } ],
+  "extension": [ {
+    "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-softwaresystem",
+    "valueReference": {
+      "reference": "Device/cqf-tooling"
+    }
+  }, {
+    "id": "effective-data-requirements",
+    "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-effectiveDataRequirements",
+    "valueReference": {
+      "reference": "#effective-data-requirements"
+    }
+  } ],
+  "url": "http://nhsnlink.org/fhir/Measure/THSAMeasure",
+  "identifier": [ {
+    "system": "https://nhsnlink.org",
+    "value": "thsameasure"
+  } ],
+  "version": "1.0.0",
+  "name": "SANER Measure",
+  "title": "SANER Measure",
+  "status": "draft",
+  "date": "2023-06-28T17:01:43-04:00",
+  "library": [ "http://nhsnlink.org/fhir/Library/THSAMeasure" ],
+  "scoring": {
+    "coding": [ {
+      "system": "http://terminology.hl7.org/CodeSystem/measure-scoring",
+      "code": "proportion",
+      "display": "Proportion"
+    } ]
+  },
+  "group": [ {
+    "code": {
+      "coding": [ {
+        "code": "beds"
+      } ]
+    },
+    "population": [ {
+      "code": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+          "code": "initial-population",
+          "display": "Initial Population"
+        } ]
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Initial Population"
+      }
+    }, {
+      "code": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+          "code": "denominator",
+          "display": "Denominator"
+        } ]
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Denominator"
+      }
+    }, {
+      "code": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+          "code": "numerator",
+          "display": "Numerator"
+        } ]
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Numerator 1"
+      }
+    } ],
+    "stratifier": [ {
+      "code": {
+        "text": "Sex Stratifier"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Sex Stratifier"
+      }
+    }, {
+      "code": {
+        "text": "Ethnicity Stratifier"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Ethnicity Stratifier"
+      }
+    }, {
+      "code": {
+        "text": "Race Stratifier"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Race Stratifier"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 10-19"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 10-19"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 20-29"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 20-29"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 30-39"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 30-39"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 40-49"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 40-49"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 50-59"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 50-59"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 60-69"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 60-69"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 70-79"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 70-79"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 80-89"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 80-89"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 90-99"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 90-99"
+      }
+    }, {
+      "code": {
+        "text": "Patient Age"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "PatientAge"
+      }
+    } ]
+  }, {
+    "code": {
+      "coding": [ {
+        "code": "icu-beds"
+      } ]
+    },
+    "population": [ {
+      "code": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+          "code": "initial-population",
+          "display": "Initial Population"
+        } ]
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Initial Population"
+      }
+    }, {
+      "code": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+          "code": "denominator",
+          "display": "Denominator"
+        } ]
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Denominator"
+      }
+    }, {
+      "code": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+          "code": "numerator",
+          "display": "Numerator"
+        } ]
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Numerator 2"
+      }
+    } ],
+    "stratifier": [ {
+      "code": {
+        "text": "Stratifier 2"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Stratifier 2"
+      }
+    }, {
+      "code": {
+        "text": "Sex Stratifier"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Sex Stratifier"
+      }
+    }, {
+      "code": {
+        "text": "Ethnicity Stratifier"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Ethnicity Stratifier"
+      }
+    }, {
+      "code": {
+        "text": "Race Stratifier"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Race Stratifier"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 10-19"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 10-19"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 20-29"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 20-29"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 30-39"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 30-39"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 40-49"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 40-49"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 50-59"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 50-59"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 60-69"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 60-69"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 70-79"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 70-79"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 80-89"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 80-89"
+      }
+    }, {
+      "code": {
+        "text": "Age Stratifier 90-99"
+      },
+      "criteria": {
+        "language": "text/cql.identifier",
+        "expression": "Age Stratifier 90-99"
+      }
+    } ]
+  } ]
+}

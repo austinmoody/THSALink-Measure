@@ -1,0 +1,3 @@
+input/tests/results/*
+temp/*
+input-cache/*

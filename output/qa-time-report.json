@@ -1,0 +1,252 @@
+{
+  "date" : "Fri, 30 Jun, 2023 09:43:26 -0400",
+  "doco" : "For each file: start is seconds after start activity occurred. Length = milliseconds activity took",
+  "files" : [
+    {
+      "name" : "/input/cqf-ccc.xml",
+      "size" : 5325,
+      "processes" : [
+        {
+          "activity" : "load",
+          "start" : 24,
+          "length" : 74
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 25,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 25,
+          "length" : 102
+        },
+        {
+          "activity" : "validate",
+          "start" : 25,
+          "length" : 1284
+        },
+        {
+          "activity" : "generate1",
+          "start" : 29,
+          "length" : 104
+        },
+        {
+          "activity" : "generate2",
+          "start" : 46,
+          "length" : 73
+        }
+      ]
+    },
+    {
+      "name" : "input/resources/library/THSAMeasure.json",
+      "size" : 564657,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 24,
+          "length" : 84
+        },
+        {
+          "activity" : "loadInfo",
+          "start" : 24,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 24,
+          "length" : 233
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 25,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 25,
+          "length" : 112
+        },
+        {
+          "activity" : "validate",
+          "start" : 27,
+          "length" : 317
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 28,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 29,
+          "length" : 1816
+        },
+        {
+          "activity" : "generate2",
+          "start" : 46,
+          "length" : 86
+        }
+      ]
+    },
+    {
+      "name" : "input/resources/library/SupplementalDataElementsFHIR4.json",
+      "size" : 121052,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 24,
+          "length" : 20
+        },
+        {
+          "activity" : "load",
+          "start" : 24,
+          "length" : 38
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 25,
+          "length" : 25
+        },
+        {
+          "activity" : "validate",
+          "start" : 27,
+          "length" : 32
+        },
+        {
+          "activity" : "generate1",
+          "start" : 30,
+          "length" : 399
+        },
+        {
+          "activity" : "generate2",
+          "start" : 46,
+          "length" : 23
+        }
+      ]
+    },
+    {
+      "name" : "input/resources/library/MATGlobalCommonFunctionsFHIR4.json",
+      "size" : 1223216,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 24,
+          "length" : 71
+        },
+        {
+          "activity" : "load",
+          "start" : 24,
+          "length" : 211
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 25,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 25,
+          "length" : 155
+        },
+        {
+          "activity" : "validate",
+          "start" : 27,
+          "length" : 87
+        },
+        {
+          "activity" : "generate1",
+          "start" : 31,
+          "length" : 3730
+        },
+        {
+          "activity" : "generate2",
+          "start" : 46,
+          "length" : 112
+        }
+      ]
+    },
+    {
+      "name" : "input/resources/library/FHIRHelpers.json",
+      "size" : 1653046,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 24,
+          "length" : 85
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 24,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 24,
+          "length" : 246
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 25,
+          "length" : 115
+        },
+        {
+          "activity" : "validate",
+          "start" : 27,
+          "length" : 1046
+        },
+        {
+          "activity" : "generate1",
+          "start" : 35,
+          "length" : 5069
+        },
+        {
+          "activity" : "generate2",
+          "start" : 46,
+          "length" : 146
+        }
+      ]
+    },
+    {
+      "name" : "input/resources/measure/THSAMeasure.json",
+      "size" : 40189,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 24,
+          "length" : 106
+        },
+        {
+          "activity" : "load",
+          "start" : 25,
+          "length" : 117
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 25,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 25,
+          "length" : 91
+        },
+        {
+          "activity" : "validate",
+          "start" : 28,
+          "length" : 247
+        },
+        {
+          "activity" : "generate1",
+          "start" : 40,
+          "length" : 203
+        },
+        {
+          "activity" : "generate2",
+          "start" : 46,
+          "length" : 57
+        }
+      ]
+    }
+  ]
+}
